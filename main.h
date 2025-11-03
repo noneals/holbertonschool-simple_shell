@@ -14,12 +14,22 @@
 /* Environment variable */
 extern char **environ;
 
-/* Function prototypes */
+/* Main shell functions */
 void display_prompt(void);
 char *read_line(void);
 char **parse_line(char *line);
-int execute_command(char **args, char *argv0);
-char *find_path(char *command);
 void free_array(char **array);
+
+/* Path and execution functions */
+char *check_absolute_path(char *command);
+char *search_in_path(char *command, char *path_copy);
+char *find_path(char *command);
+int execute_command(char **args, char *argv0);
+int fork_and_execute(char *command_path, char **args, char *argv0);
+
+/* Built-in command functions */
+void handle_exit(void);
+int handle_env(void);
+int is_builtin(char **args);
 
 #endif /* MAIN_H */

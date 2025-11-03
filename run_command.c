@@ -1,0 +1,65 @@
+#include "main.h"
+
+/**
+	* fork_and_execute - Forks and executes a command
+	* @command_path: Full path to the command
+	* @args: Array of arguments
+	* @argv0: Program name for error messages
+	*
+	* Return: 0 on success
+	*/
+int fork_and_execute(char *command_path, char **args, char *argv0)
+{
+	pid_t pid;
+	int status;
+
+	pid = fork();
+	if (pid == -1)
+	{
+	perror("fork");
+	free(command_path);
+	return (1);
+	}
+
+	if (pid == 0)
+	{
+	if (execve(command_path, args, environ) == -1)
+	{
+	perror(argv0);
+	free(command_path);
+	exit(EXIT_FAILURE);
+	}
+	}
+	else
+	{
+	waitpid(pid, &status, 0);
+	free(command_path);
+	}
+
+	return (0);
+}
+
+/**
+	* execute_command - Executes a command
+	* @args: Array of arguments
+	* @argv0: Program name for error messages
+	*
+	* Return: 0 on success, 1 on failure
+	*/
+int execute_command(char **args, char *argv0)
+{
+	char *command_path;
+
+	if (is_builtin(args))
+	return (0);
+
+	command_path = find_path(args[0]);
+	if (!command_path)
+	{
+	fprintf(stderr, "%s: 1: %s: not found\n", argv0, args[0]);
+	return (1);
+	}
+
+	return (fork_and_execute(command_path, args, argv0));
+}
+
