@@ -28,24 +28,20 @@ int handle_env(void)
 }
 
 /**
-	* is_builtin - Checks if command is a built-in and executes it
-	* @args: Array of arguments
-	*
-	* Return: 1 if built-in was executed, 0 otherwise
-	*/
+ * is_builtin - Checks if command is a built-in command
+ * @args: Array of command arguments
+ *
+ * Return: 1 if built-in executed, 0 otherwise
+ */
 int is_builtin(char **args)
 {
-	if (strcmp(args[0], "exit") == 0)
-	{
-	handle_exit();
-	return (1);
-	}
+    if (args == NULL || args[0] == NULL)
+        return (0);
 
-	if (strcmp(args[0], "env") == 0)
-	{
-	handle_env();
-	return (1);
-	}
+    if (strcmp(args[0], "exit") == 0)
+    {
+        exit(0);
+    }
 
-	return (0);
+    return (0);
 }
