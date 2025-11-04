@@ -51,25 +51,3 @@ char *search_in_path(char *command, char *path_copy)
 	free(path_copy);
 	return (NULL);
 }
-
-/**
-	* find_path - Finds the full path of a command
-	* @command: The command to find
-	*
-	* Return: Full path of command, or NULL if not found
-	*/
-char *find_path(char *command)
-{
-	char *path_env, *path_copy, *result;
-
-	result = check_absolute_path(command);
-	if (result)
-	return (result);
-
-	path_env = getenv("PATH");
-	if (!path_env)
-	return (NULL);
-
-	path_copy = strdup(path_env);
-	return (search_in_path(command, path_copy));
-}
