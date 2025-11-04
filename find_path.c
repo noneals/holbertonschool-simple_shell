@@ -6,8 +6,7 @@
  *
  * Return: Full path to command if found, NULL otherwise
  */
- * find_path - Finds command full path
- */
+
 char *find_path(char *command)
 {
     char *path_env, *path_copy, *dir, *full_path;
