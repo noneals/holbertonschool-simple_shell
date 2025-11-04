@@ -33,7 +33,6 @@ int handle_env(void)
  *
  * Return: 1 if built-in executed, 0 otherwise
  */
- */  
 int is_builtin(char **args)
 {
     if (args == NULL || args[0] == NULL)
@@ -42,6 +41,11 @@ int is_builtin(char **args)
     if (strcmp(args[0], "exit") == 0)
     {
         handle_exit();
+        return (1);
+    }
+    else if (strcmp(args[0], "env") == 0)
+    {
+        handle_env();
         return (1);
     }
 
