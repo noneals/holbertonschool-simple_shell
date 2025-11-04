@@ -21,8 +21,6 @@ char **parse_line(char *line);
 void free_array(char **array);
 
 /* Path and execution functions */
-char *check_absolute_path(char *command);
-char *search_in_path(char *command, char *path_copy);
 char *find_path(char *command);
 int execute_command(char **args, char *argv0);
 int fork_and_execute(char *command_path, char **args, char *argv0);
