@@ -1,12 +1,16 @@
 #include "main.h"
 
 /**
-	* handle_exit - Handles the exit built-in command
-	*
-	* Return: void (exits the program)
-	*/
-void handle_exit(void)
+ * handle_exit - Handles the exit built-in command
+ * @line: The input line to free
+ * @args: The argument array to free
+ *
+ * Return: void (exits the program)
+ */
+void handle_exit(char *line, char **args)
 {
+    free(line);
+    free_array(args);
 	exit(0);
 }
 
@@ -30,18 +34,19 @@ int handle_env(void)
 /**
  * is_builtin - Checks if command is a built-in command
  * @args: Array of command arguments
+ * @line: The input line (for memory cleanup on exit)
  *
  * Return: 1 if built-in executed, 0 otherwise
  */
-int is_builtin(char **args)
+int is_builtin(char **args, char *line)
 {
     if (args == NULL || args[0] == NULL)
         return (0);
 
     if (strcmp(args[0], "exit") == 0)
     {
-        handle_exit();  
-        return (1);     
+        handle_exit(line, args);
+        return (1);
     }
     else if (strcmp(args[0], "env") == 0)
     {
