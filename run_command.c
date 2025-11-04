@@ -44,7 +44,7 @@ int fork_and_execute(char *command_path, char **args, char *argv0)
 	* @args: Array of arguments
 	* @argv0: Program name for error messages
 	*
-	* Return: 0 on success, 1 on failure
+	* Return: 0 on success, 127 if command not found
 	*/
 int execute_command(char **args, char *argv0)
 {
@@ -57,7 +57,7 @@ int execute_command(char **args, char *argv0)
 	if (!command_path)
 	{
 	fprintf(stderr, "%s: 1: %s: not found\n", argv0, args[0]);
-	return (1);
+	return (127);
 	}
 
 	return (fork_and_execute(command_path, args, argv0));
