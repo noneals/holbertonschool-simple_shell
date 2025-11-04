@@ -34,6 +34,8 @@ int fork_and_execute(char *command_path, char **args, char *argv0)
     {
         waitpid(pid, &status, 0);
         free(command_path);
+        if (WIFEXITED(status))
+        return (WEXITSTATUS(status));
     }
 
     return (0);
