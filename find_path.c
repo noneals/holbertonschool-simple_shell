@@ -3,16 +3,22 @@
 /**
  * get_path_env - Gets the PATH environment variable
  *
- * Return: Pointer to PATH value, or NULL if not found
+ * Return: Pointer to PATH value, or NULL if not found or empty
  */
 char *get_path_env(void)
 {
     int i = 0;
+    char *path_value;
 
     while (environ[i])
     {
         if (strncmp(environ[i], "PATH=", 5) == 0)
-            return (environ[i] + 5);
+            {
+            path_value = environ[i] + 5;
+            if (*path_value == '\0')
+                return (NULL);
+            return (path_value);
+        }
         i++;
     }
     return (NULL);
