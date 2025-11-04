@@ -38,10 +38,12 @@ int is_builtin(char **args)
     if (args == NULL || args[0] == NULL)
         return (0);
 
-    if (strcmp(args[0], "exit") == 0)
+      if (strcmp(args[0], "exit") == 0)
     {
-        handle_exit();
-        return (1);
+        if (args[1])  
+            exit(atoi(args[1]));
+        else
+            exit(0);
     }
     else if (strcmp(args[0], "env") == 0)
     {
