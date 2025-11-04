@@ -1,6 +1,24 @@
 #include "main.h"
 
 /**
+ * get_path_env - Gets the PATH environment variable
+ *
+ * Return: Pointer to PATH value, or NULL if not found
+ */
+char *get_path_env(void)
+{
+    int i = 0;
+
+    while (environ[i])
+    {
+        if (strncmp(environ[i], "PATH=", 5) == 0)
+            return (environ[i] + 5);
+        i++;
+    }
+    return (NULL);
+}
+
+/**
  * find_path - Finds the full path of a command
  * @command: The command name to search for
  *
@@ -19,7 +37,7 @@ char *find_path(char *command)
         return (NULL);
     }
 
-    path_env = getenv("PATH");
+    path_env = get_path_env();
     if (!path_env)
         return (NULL);
 
