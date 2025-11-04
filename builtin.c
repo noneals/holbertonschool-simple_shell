@@ -7,7 +7,6 @@
 	*/
 void handle_exit(void)
 {
-	printf("OK\n");
 	exit(0);
 }
 
