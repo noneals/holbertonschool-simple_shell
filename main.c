@@ -42,7 +42,7 @@ int main(int argc, char **argv)
             continue;
         }
 
-        status = execute_command(args, argv[0], line);
+        status = execute_command(args, argv[0], line, status);
 
         free(line);
         free_array(args);
