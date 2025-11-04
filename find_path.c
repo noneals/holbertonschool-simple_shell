@@ -1,6 +1,11 @@
 #include "main.h"
 
 /**
+ * find_path - Finds the full path of a command
+ * @command: The command name to search for
+ *
+ * Return: Full path to command if found, NULL otherwise
+ */
  * find_path - Finds command full path
  */
 char *find_path(char *command)
