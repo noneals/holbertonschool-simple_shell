@@ -22,12 +22,12 @@ void free_array(char **array);
 
 /* Path and execution functions */
 char *find_path(char *command);
-int execute_command(char **args, char *argv0);
+int execute_command(char **args, char *argv0, char *line);
 int fork_and_execute(char *command_path, char **args, char *argv0);
 
 /* Built-in command functions */
-void handle_exit(void);
+void handle_exit(char *line, char **args);
 int handle_env(void);
-int is_builtin(char **args);
+int is_builtin(char **args, char *line);
 
 #endif /* MAIN_H */
