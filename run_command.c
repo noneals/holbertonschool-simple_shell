@@ -6,7 +6,7 @@
  * @args: Array of arguments
  * @argv0: Program name for error messages
  *
- * Return: 0 on success
+ * Return: Exit status of the command
  */
 int fork_and_execute(char *command_path, char **args, char *argv0)
 {
@@ -35,7 +35,7 @@ int fork_and_execute(char *command_path, char **args, char *argv0)
         waitpid(pid, &status, 0);
         free(command_path);
         if (WIFEXITED(status))
-        return (WEXITSTATUS(status));
+            return (WEXITSTATUS(status));
     }
 
     return (0);
@@ -46,14 +46,15 @@ int fork_and_execute(char *command_path, char **args, char *argv0)
  * @args: Array of arguments
  * @argv0: Program name for error messages
  * @line: The input line (for memory cleanup on exit)
+ * @last_status: The last exit status
  *
- * Return: 0 on success, 127 if command not found
+ * Return: Exit status of command, or 127 if command not found
  */
-int execute_command(char **args, char *argv0, char *line)
+int execute_command(char **args, char *argv0, char *line, int last_status)
 {
     char *command_path;
 
-    if (is_builtin(args, line))
+    if (is_builtin(args, line, last_status))
         return (0);
 
     command_path = find_path(args[0]);
