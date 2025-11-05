@@ -14,12 +14,10 @@ int main(int argc, char **argv)
     int status = 0;
 
     (void)argc;
-
     while (1)
     {
         if (isatty(STDIN_FILENO))
             display_prompt();
-
         line = read_line();
         if (line == NULL)
         {
@@ -27,13 +25,11 @@ int main(int argc, char **argv)
                 write(STDOUT_FILENO, "\n", 1);
             break;
         }
-
         if (line[0] == '\0')
         {
             free(line);
             continue;
         }
-
         args = parse_line(line);
         if (args == NULL || args[0] == NULL)
         {
@@ -41,12 +37,9 @@ int main(int argc, char **argv)
             free_array(args);
             continue;
         }
-
         status = execute_command(args, argv[0], line, status);
-
         free(line);
         free_array(args);
     }
-
     return (status);
 }
